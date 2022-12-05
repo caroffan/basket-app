@@ -9,6 +9,7 @@ import firebase from "firebase/app";
 import { initializeApp } from "firebase/app";
 import { firebaseConfig } from "../config/firebaseConfig";
 import "firebase/auth";
+import "../App.css";
 import {getAuth, signInWithEmailAndPassword} from "firebase/auth";
 
 
@@ -61,7 +62,7 @@ function LoginPage() {
 
         <div className="App">
             <header className="App-header">
-                <img src={logo} className="App-logo" alt="logo"/>
+                <img src={logo} className="App-logo animate__fadeInDown" alt="logo"/>
                 <Button type="primary" onClick={() => setModalOpen(true)}>Login</Button>
             </header>
 

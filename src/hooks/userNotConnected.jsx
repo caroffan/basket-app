@@ -1,14 +1,9 @@
 
-import {Button, Result} from "antd";
+import Error403 from "../errors/Error403";
 
 export default function userNotConnected() {
     return (
-        <Result
-            status="403"
-            title="403"
-            subTitle="Sorry, you are not authorized to access this page."
-            extra={<Button type="primary" href="/">Back to Login</Button>}
-        />
+        <Error403/>
     )
 
 
