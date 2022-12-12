@@ -12,6 +12,7 @@ import {PageHeader} from "@ant-design/pro-components";
 import Home from "./pages/Home";
 import {getAuth, onAuthStateChanged} from "firebase/auth";
 import userNotConnected from "./hooks/userNotConnected";
+import { getStorage, ref } from "firebase/storage";
 
 const {Footer, Content} = Layout;
 
@@ -53,16 +54,23 @@ function App() {
         </Button>
     ]
 
+    const storage = getStorage();
+
+// Create a storage reference from our storage service
+    const storageRef = ref(storage, 'profile/20220331_085510.jpg');
     return (
         <Layout className="site-layout">
             <PageHeader
                 title={pageTitle !== "React App" ? pageTitle : "Error"}
-                avatar={connected ? {src: ""} : null}
+                avatar={connected ? {src: storageRef.fullPath} : null}
                 onBack={() => window.history.back()}
                 extra={connected ? nav : null}
                 style={{
                     width : "100%",
                     position: "sticky",
+                    zIndex: 1,
+                    backgroundColor: "white",
+                    boxShadow: "0 0 10px 0 rgba(0, 0, 0, 0.1)",
                     top: 0}}
             />
             <Content style={{margin: 20, minHeight : "75vh"}}>

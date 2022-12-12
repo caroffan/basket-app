@@ -4,30 +4,35 @@ import {Table} from "antd";
 const StandingTeam = ({teams}, {loading}) => {
     const columns = [
         {
-            title: 'Rank',
-            dataIndex: 'conference',
-            key: 'conference.rank',
-            render: (record) => {
-                return (
-                    <div>
-                        <p>{record.rank}</p>
-                    </div>
-                )
+            title: teams[0].conference.name.toUpperCase(),
+            children: [{
+                title: '',
+                dataIndex: 'conference',
+                key: 'conference.rank',
+                render: (record) => {
+                    return (
+                        <div>
+                            <p>{record.rank}</p>
+                        </div>
+                    )
+                },
+                align: 'center',
+                defaultSortOrder: 'ascend',
+                width: 10,
+                sorter: (a, b) => a.conference.rank - b.conference.rank,
+                sortDirections: ['ascend'],
             },
-            align: 'center',
-            defaultSortOrder: 'ascend',
-            width: 50,
-        },
         {
             title: 'Team',
             dataIndex: 'team',
             key: 'team.name',
-            render : (record) => {
+            render: (record) => {
                 return (<div style={{display: "flex", alignItems: "center"}}>
-                    <img src={record.logo} alt={'icon'} style={{width: 25}}/>
-                    <div>{record.name}</div>
+                        <img src={record.logo} alt={'icon'} style={{width: 25}}/>
+                        <div>{record.name}</div>
                     </div>
-                )},
+                )
+            },
             align: 'center'
         },
         {
@@ -81,8 +86,8 @@ const StandingTeam = ({teams}, {loading}) => {
                 )
             },
             align: 'center'
-        }
-    ]
+        }]
+}    ]
 
     return (
         <Table bordered={true}
@@ -91,7 +96,8 @@ const StandingTeam = ({teams}, {loading}) => {
                dataSource={teams}
                pagination={false}
                rowKey={record => record.team.id}
-               size={"small"}
+               size="small"
+               style={{fontSize: 8}}
         />
     );
 };
