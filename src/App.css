@@ -6,6 +6,12 @@
   height: 40vmin;
   pointer-events: none;
 }
+
+.App-degraded-background {
+  background: linear-gradient(180deg, #FF5C00 0%, #FFC700 100%);
+  border-radius: 3px;
+  transform: rotate(-90.15deg);
+}
 @-webkit-keyframes fadeInDown {
   from {
     opacity: 0;

@@ -26,7 +26,6 @@ function App() {
     const auth = getAuth();
     onAuthStateChanged(auth, (user) => {
         if (user) {
-            // User is signed in, see docs for a list of available properties
             setConnected(true);
         } else {
             // User is signed out
@@ -58,6 +57,7 @@ function App() {
         <Layout className="site-layout">
             <PageHeader
                 title={pageTitle !== "React App" ? pageTitle : "Error"}
+                avatar={connected ? {src: ""} : null}
                 onBack={() => window.history.back()}
                 extra={connected ? nav : null}
                 style={{
