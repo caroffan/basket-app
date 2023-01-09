@@ -3,7 +3,6 @@ import {message} from "antd";
 
 export default function logout() {
     const auth = getAuth();
-    console.log(auth);
     signOut(auth).then(() => {
         message.success("disconnected");
         window.location.href = "/";
