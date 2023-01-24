@@ -26,7 +26,7 @@ const Home = () => {
   )
   const [east, setEast] = useState([]);
   const [west, setWest] = useState([]);
-  const [data, setData] = useState([]);
+  const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
 
   const onSearch = async (value) => {
@@ -87,8 +87,8 @@ const Home = () => {
       <Col className="gutter-row" span={7}><StandingTeam conf={'east'} teams={east} loading={loading}/></Col>
       <Col className="gutter-row" span={7}><StandingTeam conf={'west'} teams={west} loading={loading}/></Col>
       <Col className="gutter-row"  span={10}>
-        <Search size={"large"} placeholder="input team name" onSearch={onSearch} enterButton />
-        <Stats data={east[0]}/>
+        <Search size={"large"} placeholder="input team code" onSearch={onSearch} enterButton />
+        {data !== null ? <Stats data={data}/> : null}
       </Col>
     </Row>
   );
