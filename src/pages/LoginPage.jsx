@@ -2,8 +2,6 @@ import logo from '../logo.svg';
 import {Button, Form, Input, message, Modal, Typography} from "antd";
 import React, {useEffect, useState} from "react";
 import {LockOutlined, MailOutlined} from "@ant-design/icons";
-import Link from "antd/es/typography/Link";
-import firebase from "firebase/app";
 import {initializeApp} from "firebase/app";
 import {firebaseConfig} from "../config/firebaseConfig";
 import "firebase/auth";
@@ -55,8 +53,6 @@ function LoginPage() {
   const handleCancel = () => {
     setModalOpen(false);
   };
-
-  const {Title} = Typography;
   return (
 
     <div className="App">
@@ -124,31 +120,7 @@ function LoginPage() {
                 onChange={onPasswordChange}
               />
             </Form.Item>
-
-            <Button
-              type="link"
-              style={{
-                fontSize: 11,
-                position: "relative",
-                top: -25,
-                right: -105,
-              }}
-              className="login-form-forgot"
-            >
-              Forget password ?
-            </Button>
           </Form>
-        </Typography>
-
-        <Typography
-          style={{
-            textAlign: "center",
-          }}
-        >
-          <Title level={4} style={{fontWeight: 500, fontSize: 18}}>
-            New in Basketball Stats ?
-          </Title>
-          <Link href="/signup">Signup</Link>
         </Typography>
       </Modal>
     </div>
