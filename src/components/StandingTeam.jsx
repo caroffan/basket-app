@@ -96,7 +96,7 @@ const StandingTeam = ({conf, teams, loading}) => {
            dataSource={teams}
            pagination={false}
            rowKey={record => record.team.id}
-           size="small"
+           size={"small"}
            style={{fontSize: 8}}
     />
   );
