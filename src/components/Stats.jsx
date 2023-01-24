@@ -2,10 +2,10 @@ import React from 'react';
 import {Card, Col, Row, Statistic} from "antd";
 import {ArrowDownOutlined, ArrowUpOutlined} from "@ant-design/icons";
 
-const Stats = ({data}) => {
+const Stats = ({data, loading}) => {
   return (
     <div>
-      <Card bordered={false} style={{marginBottom: 8, marginTop: 8}}>
+      <Card loading={loading} bordered={false} style={{marginBottom: 8, marginTop: 8}}>
         <Row gutter={16}>
           <Col span={12}>
             <Statistic groupSeparator={""} title="Season" value={data.season}/>
@@ -23,7 +23,7 @@ const Stats = ({data}) => {
       </Card>
       <Row gutter={16}>
         <Col span={24} style={{marginBottom: 8, marginTop: 8}}>
-          <Card bordered={false}>
+          <Card loading={loading} bordered={false}>
             <Row style={{justifyContent: "space-around"}}>
               <Statistic
                 title="Rank"
@@ -41,14 +41,14 @@ const Stats = ({data}) => {
                 }}
               />
               <Statistic
-                title="Games Behind 1st"
-                value={data.gamesBehind === null ? "1st" : data.gamesBehind}
+                title="Games Behind "
+                value={data.gamesBehind === null ? "no Info" : data.gamesBehind}
               />
             </Row>
           </Card>
         </Col>
         <Col span={12}>
-          <Card title={"Wins"} bordered={false}>
+          <Card loading={loading} title={"Wins"} bordered={false}>
             <Statistic
               title="Home"
               value={data.win.home}
@@ -82,7 +82,7 @@ const Stats = ({data}) => {
           </Card>
         </Col>
         <Col span={12}>
-          <Card title={"Losses"} bordered={false}>
+          <Card loading={loading} title={"Losses"} bordered={false}>
             <Statistic
               title="Home"
               value={data.loss.home}

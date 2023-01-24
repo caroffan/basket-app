@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import StandingTeam from "../components/StandingTeam";
 import {standings} from "../exempleStanding";
-import {Col, Row} from "antd";
+import {Col, message, Row} from "antd";
 import axios from "axios";
 import {standingsEast, standingsWest} from "../api";
 import {initializeApp} from "firebase/app";
@@ -10,6 +10,7 @@ import {firebaseConfig} from "../config/firebaseConfig";
 import {doc, setDoc, getDoc } from "firebase/firestore";
 import { Input } from 'antd';
 import Stats from "../components/Stats";
+import {FieldLabel} from "@ant-design/pro-components";
 const { Search } = Input;
 
 require("firebase/firestore");
@@ -28,23 +29,25 @@ const Home = () => {
   const [west, setWest] = useState([]);
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [search, setSearch] = useState(false);
 
   const onSearch = async (value) => {
+    setSearch(true);
     const docRef = doc(db, "teams", value);
     const docSnap = await getDoc(docRef);
 
     if (docSnap.exists()) {
-      console.log("Document data:", docSnap.data());
       setData(docSnap.data());
     } else {
       // doc.data() will be undefined in this case
-      console.log("No such document!");
+      message.error(value + " not found");
     }
+    setSearch(false);
   }
 
   async function putTeam(data) {
     try {
-      await setDoc(doc(db, "teams", data.team.code), data);
+      await setDoc(doc(db, "teams", data.team.nickname), data);
     } catch (e) {
       console.error("Error adding document: ", e);
     }
@@ -87,8 +90,9 @@ const Home = () => {
       <Col className="gutter-row" span={7}><StandingTeam conf={'east'} teams={east} loading={loading}/></Col>
       <Col className="gutter-row" span={7}><StandingTeam conf={'west'} teams={west} loading={loading}/></Col>
       <Col className="gutter-row"  span={10}>
-        <Search size={"large"} placeholder="input team code" onSearch={onSearch} enterButton />
-        {data !== null ? <Stats data={data}/> : null}
+        <FieldLabel label="Search a team " />
+        <Search size={"large"} placeholder="input team nickname (ex : 'Heat')" onSearch={onSearch} enterButton />
+        {data !== null ? <Stats loading={search} data={data}/> : null}
       </Col>
     </Row>
   );
